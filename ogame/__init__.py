@@ -930,20 +930,18 @@ class OGame(object):
                     for fleet in fleets:
                         tech.append(const.convert_tech(int(fleet.replace('tech', '')), 'shipyard'))
                     defences = spy_html.find_all('class', 'fright', 'value')
+                    
+                    
+                    
+                    
                     for defence in defences:
-                        print(defence)
-                        continue
-                        if defence != 'defense_imagefloat_left':
-                            tech.append(const.convert_tech(int(defence.replace('defense', '')), 'defenses'))
-                    buildings = spy_html.find_all('class', 'building', 'attribute')
-                    for building in buildings:
-                        if building != 'building_imagefloat_left':
-                            tech.append(const.convert_tech(int(building.replace('building', '')), 'supplies'))
-                    researchings = spy_html.find_all('class', 'research', 'attribute')
-                    for research in researchings:
-                        if research != 'research_imagefloat_left':
-                            tech.append(const.convert_tech(int(research.replace('research', '')), 'research'))
-                    technology = dict((tech, amount) for tech, amount in zip(tech, fright[7:]))
+                        if not defence.isdigit():
+                            defence = defences.remove(defence)
+                    Tech_values = defences[3:]
+                    Tech_keys = spy_html.find_all('class', 'detail_list_txt', 'value')
+                    technology = dict(zip(Tech_keys , Tech_values))
+                    
+                    
                     list = [id, time, coordinates, resources, technology]
 
                 spyreports.append(spy_report_class)
