@@ -198,7 +198,7 @@ class OGame(object):
         for name in self.landing_page.find_all('class', 'moonlink', 'attribute', 'title'):
             names.append(name.split(';')[2].split('[')[0])
         return names
-    
+
     def celestial(self, id):
         response = self.session.get(self.index_php + 'page=ingame&component=overview&cp={}'.format(id)).text
         textContent1 = response.split('textContent[1] = "')[1]
